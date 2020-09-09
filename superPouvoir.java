@@ -1,7 +1,8 @@
 public interface superPouvoir {
  
- int extra =2;
- 
- public double sort();
-
+    int extra =2;
+    
+    public double sort();
+   
 }
+   
