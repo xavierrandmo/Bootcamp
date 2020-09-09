@@ -1,26 +1,42 @@
 public class Monstre extends Personnage {
-
-    public Monstre (String nom, int pointDeVie) {
-        super(nom, pointDeVie);
-    }
-    
  
-    public void attaque(final Personnage p) {
-		if (this.mort()!=true) {
-            double coup = 0.5*this.getVie();
-            int coup_int = (int) coup;
-            this.addVie(p.subitFrappe(coup_int));
-        }
-    }
+ public Monstre (String nomJ, int pointVieJ) {
+  // le constructeur
+  super (nomJ, pointVieJ);
+ }
 
-    public int subitCharme(final int coup) {
-        this.addVie(-1*coup);
+ public String toString () {
+  return "Je suis un monstre, je m'appelle " + this.nom + " j'ai " +this.pointsVie + " points de vie";
+ }
 
-        return (int) 0.5*this.getVie();
-    }
+ public int subitFrappe (int coup) {
+ // quand le monstre est frappé par le personnage p
+  int force =coup;
+  int pointsVie = this.getVie();
+  
+  this.addVie(-force);
+  
+  int forceBless = pointsVie/2;  
+  
+  return forceBless;
+ }
 
-    public int subitFrappe(final int coup) {
-        this.addVie(-1*coup);
-        return (int) -0.5*this.getVie();
-    }
+ public int subitCharme (int coup) {
+  int forceCharme = coup;
+  int pointsVie = this.getVie();
+  this.addVie (-forceCharme); 
+  
+  int pointCharme = pointsVie/2;
+  
+  return pointCharme;
+ }
+ 
+ public void attaque (Personnage p) {
+  if (! this.mort()) {
+	int forceAttaque = (this.getVie())/2; //la force de l'attaque est egale à la moitie de points de vie du monstre
+	p.subitFrappe(forceAttaque); 
+	
+  }
+}
+
 }

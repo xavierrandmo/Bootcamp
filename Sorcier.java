@@ -1,25 +1,39 @@
-public class Sorcier extends Personnage{
-    private final double pouvoir;
-    
-    public Sorcier (final String nom, final int pointDeVie) {
-        super(nom, pointDeVie);
-        this.pouvoir = Math.random();    
-    }
+public class Sorcier extends Personnage {
+ protected double pouvoir;
 
-    public void attaque(final Personnage p) {
-        if (!this.mort()) {
-            final double coup = pouvoir * getVie();
-            final int coup_int = (int) coup;
-            this.addVie(p.subitCharme(coup_int));
-        }
-    }
+ public Sorcier (String nomJ, int pointVieJ) {
+  // le constructeur
+  super (nomJ, pointVieJ);
+  this.pouvoir = Math.random();
+ }
 
-    public int subitCharme(final int coup) {
-        return 0;
-    }
+  public String toString () {
+  return "Je suis un sorcier, je m'appelle " + this.nom + " j'ai " +this.pointsVie + " points de vie";
+ }
 
-    public int subitFrappe(final int coup) {
-        this.addVie(-1*coup);
-        return (int) ((int) -1 * this.pouvoir * this.getVie());
-    }
+ public void attaque (Personnage p) {
+  if (!this.mort()) {
+	double forceCharme = (double)(this.getVie())*(this.pouvoir);
+	int coup = (int)forceCharme;
+        p.subitCharme (coup);
+  }
+ }
+
+ public int subitFrappe (int coup) {
+  int forceFrappe = coup;
+  this.addVie(-forceFrappe);
+
+  double forceBlessure = (double)(this.getVie()) * (this.pouvoir);
+  int coupBless = (int)forceBlessure;
+ 
+  return coupBless;
+ }
+
+ public int subitCharme (int coup) {
+  return 0;
+ }
+
+ public double getPouvoir() {
+  return this.pouvoir;
+ }
 }
